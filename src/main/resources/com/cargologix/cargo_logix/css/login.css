@@ -1,0 +1,38 @@
+.main-app {
+    -fx-font-family: "Microsoft JhengHei" ;
+    -fx-background-color: #FFFF ;
+}
+
+.login_btn {
+    -fx-background-color: #9415F3 ;
+    -fx-border-width: .4px ;
+    -fx-background-radius: 30px ;
+    -fx-text-fill: #fff ;
+    -fx-cursor: hand ;
+    -fx-font-weight: bold;
+}
+
+.login_btn:hover {
+    -fx-background-color: #E58585 ;
+    -fx-text-fill: #fff ;
+}
+
+.cancel_btn {
+    -fx-background-color: #E55353 ;
+    -fx-border-width: .4px ;
+    -fx-background-radius: 30px ;
+    -fx-text-fill: #fff ;
+    -fx-cursor: hand ;
+    -fx-font-family: "Microsoft JhengHei" ;
+    -fx-font-weight: bold;
+}
+
+.cancel_btn:hover {
+    -fx-background-color: #E58585 ;
+    -fx-text-fill: #fff ;
+}
+
+.text-field {
+    -fx-background-radius: 30px ;
+
+}
