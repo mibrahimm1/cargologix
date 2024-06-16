@@ -44,6 +44,20 @@ public class Shipment {
     }
 
     public Shipment() {
+        this.id = new SimpleStringProperty();
+        this.name = new SimpleStringProperty();
+        this.sender = new SimpleStringProperty();
+        this.receiver = new SimpleStringProperty();
+        this.destination = new SimpleStringProperty();
+        this.weight = new SimpleFloatProperty();
+        this.shipmentType = new SimpleStringProperty();
+        this.containerType = new SimpleStringProperty();
+        this.scheduledTime = new SimpleStringProperty();
+        this.isOut = new SimpleBooleanProperty();
+        this.fragile = new SimpleBooleanProperty();
+        this.tempControl = new SimpleBooleanProperty();
+        this.scheduled = new SimpleBooleanProperty();
+        this.approved = new SimpleBooleanProperty();
 
     }
     public Shipment(String id, String destination, String weight,
@@ -53,6 +67,7 @@ public class Shipment {
         this.weight = new SimpleFloatProperty(Float.parseFloat(weight));
         this.shipmentType = new SimpleStringProperty(shipmentType);
     }
+
 
     /* public Shipment(String id, String destination, String containertype,
                     String shipmentTime) {
