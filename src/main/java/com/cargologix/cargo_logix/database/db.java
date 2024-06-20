@@ -95,12 +95,6 @@ public class db {
             DatabaseMetaData dbm = connection.getMetaData();
             ResultSet tables = dbm.getTables(null, null, TABLE_NAME.toUpperCase(), null);
 
-            // Print all table names to verify what's in the database
-            System.out.println("Tables in the database:");
-            while (tables.next()) {
-                System.out.println(tables.getString("TABLE_NAME"));
-            }
-
             if (tables.next()) {
                 System.out.println("Table " + TABLE_NAME + " already exists.");
             } else {
@@ -125,12 +119,6 @@ public class db {
 
             DatabaseMetaData dbm = connection.getMetaData();
             ResultSet tables = dbm.getTables(null, null, TABLE_NAME.toUpperCase(), null);
-
-            // Print all table names to verify what's in the database
-            System.out.println("Tables in the database:");
-            while (tables.next()) {
-                System.out.println(tables.getString("TABLE_NAME"));
-            }
 
             if (tables.next()) {
                 System.out.println("Table " + TABLE_NAME + " already exists.");
@@ -227,7 +215,7 @@ public class db {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         try {
             db newdb = new db() ;
         } catch (ClassNotFoundException e) {

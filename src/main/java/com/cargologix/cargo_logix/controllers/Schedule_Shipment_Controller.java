@@ -167,6 +167,7 @@ public class Schedule_Shipment_Controller implements Initializable {
                 String Destination = null;
                 String ContainerType = rs.getString("containerType");
                 String ShipmentTime = rs.getString("shipmentTime");
+                System.out.println(ShipID + Destination + ContainerType + ShipmentTime);
                 String qu2 = "SELECT * FROM `SHIPMENT` WHERE id = " + ShipID;
                 ResultSet rs2 = null;
                 try {
@@ -195,6 +196,13 @@ public class Schedule_Shipment_Controller implements Initializable {
         }
 
         approvedRequests.getItems().setAll(scheduledShipments);
+    }
+
+    private void clearTable() {
+        unscheduledShipments.clear();
+        scheduledShipments.clear();
+        pendingRequests.getItems().clear();
+        approvedRequests.getItems().clear();
     }
 
     private void initCol() {
@@ -228,6 +236,7 @@ public class Schedule_Shipment_Controller implements Initializable {
                 String action = "INSERT INTO SCHEDULED_SHIPMENT (id,containerType, shipmentTime, isApproved) VALUES ('"
                         + shipID + "','" + containertype + "','" + scheduleDate + "',0)" ;
                 if (DBhandler.executeAction(action1) && DBhandler.executeAction(action)) {
+                    clearTable();
                     alert.confirmMessege("Success","The shipment had been scheduled and is sent for approval");
                     loadData();
                 } else {
