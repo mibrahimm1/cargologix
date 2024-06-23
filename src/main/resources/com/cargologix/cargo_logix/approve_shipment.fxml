@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="920.0" styleClass="rootPane" stylesheets="@css/approve_shipment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargologix.cargo_logix.controllers.Approve_Shipment_Controller">
+<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="920.0" styleClass="rootPane" stylesheets="@css/approve_shipment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargologix.cargo_logix.controllers.Approve_Shipment_Controller">
    <children>
       <AnchorPane prefHeight="80.0" prefWidth="920.0" styleClass="title-bar">
          <children>
@@ -63,7 +63,7 @@
                   <DatePicker fx:id="dateSelect" layoutX="43.0" layoutY="114.0" onAction="#viewShipments" prefHeight="23.0" prefWidth="191.0" />
                   <Button layoutX="685.0" layoutY="48.0" mnemonicParsing="false" onAction="#approveShipment" prefHeight="25.0" prefWidth="206.0" styleClass="submit_btn" text="Approve" />
                   <Button layoutX="685.0" layoutY="89.0" mnemonicParsing="false" onAction="#rejectShipment" prefHeight="25.0" prefWidth="206.0" styleClass="reject_btn" text="Reject" />
-                  <Button layoutX="685.0" layoutY="131.0" mnemonicParsing="false" onAction="#cancelShipment" prefHeight="25.0" prefWidth="206.0" styleClass="cancel_btn" text="Cancel" />
+                  <Button layoutX="685.0" layoutY="131.0" mnemonicParsing="false" onAction="#cancelShipment" prefHeight="25.0" prefWidth="206.0" styleClass="cancel_btn" text="Close" />
                </children>
             </AnchorPane>
          </bottom>

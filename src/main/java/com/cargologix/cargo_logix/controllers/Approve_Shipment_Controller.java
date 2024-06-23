@@ -14,6 +14,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -23,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +39,8 @@ public class Approve_Shipment_Controller implements Initializable {
 
     db DBhandler = db.getInstance();
 
+    @FXML
+    private AnchorPane rootPane;
     @FXML
     private TableColumn<Shipment, String> dateP;
 
@@ -141,16 +146,65 @@ public class Approve_Shipment_Controller implements Initializable {
 
     @FXML
     void approveShipment(ActionEvent event) {
+        String shipID = shipmentID.getText();
+        try {
+            LocalDate dateSelected = dateSelect.getValue();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+            String formattedDateSelected = dateSelected.format(formatter);
+            if (shipID.isEmpty() || formattedDateSelected.isEmpty()) {
+                if (shipID.isEmpty())
+                    alert.errorMessege("Error", "Please enter a Shipment ID");
+                if (formattedDateSelected.isEmpty())
+                    alert.infoMessege("Information", "Please confirm the approved shipment date");
+            } else {
+                Optional<ButtonType> response = alert.confirmMessege("Confirm", "Are you sure you want to approve this shipment?");
+                if (response.get() == ButtonType.OK) {
+                    formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00");
+                    formattedDateSelected = dateSelected.format(formatter);
+                    String action = "UPDATE SCHEDULED_SHIPMENT SET isApproved = 1, " + "shipmentTime = '" + formattedDateSelected + "' WHERE id = '" + shipID + "'";
+                    if (DBhandler.executeAction(action)) {
+                        alert.infoMessege("Success", "Shipment Approved Successfully");
+                        clearTable();
+                        loadData();
 
+                    } else {
+                        alert.errorMessege("Error", "Failed to approve shipment");
+                    }
+                } else {
+                    alert.infoMessege("Cancelled", "Approval of Shipment has been cancelled");
+                }
+            }
+        } catch (Exception e) {
+            alert.infoMessege("Information", "Please reconfirm the shipments that are already approved on the shipment's scheduled date before proceeding");
+        }
     }
 
     @FXML
     void cancelShipment(ActionEvent event) {
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        stage.close();
 
     }
 
     @FXML
     void rejectShipment(ActionEvent event) {
+        String shipID = shipmentID.getText();
+        if (shipID.isEmpty()) {
+            alert.errorMessege("Error","Please enter a Shipment ID");
+        } else {
+            Optional<ButtonType> response = alert.confirmMessege("Confirm", "Are you sure you want to reject this shipment?");
+            if (response.get() == ButtonType.OK) {
+                String action = "UPDATE SHIPMENT SET isScheduled = 0 WHERE id = '" + shipID + "'";
+                String action2 = "DELETE FROM SCHEDULED_SHIPMENT WHERE id = '" + shipID + "'";
+                if (DBhandler.executeAction(action) && DBhandler.executeAction(action2)) {
+                    alert.infoMessege("Success", "Shipment Rejected");
+                    clearTable();
+                    loadData();
+                } else {
+                    alert.errorMessege("Error", "Failed to reject shipment");
+                }
+            }
+        }
 
     }
 
@@ -195,5 +249,12 @@ public class Approve_Shipment_Controller implements Initializable {
         }
         sameDateView.getItems().setAll(sameDateShipments);
 
+    }
+
+    private void clearTable() {
+        pendingShipments.clear();
+        sameDateShipments.clear();
+        pendingRequestVIew.getItems().clear();
+        sameDateView.getItems().clear();
     }
 }

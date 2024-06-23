@@ -1,6 +1,9 @@
 package com.cargologix.cargo_logix.classes;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public class AlertMessege {
     public void errorMessege(String title, String messege) {
@@ -17,11 +20,12 @@ public class AlertMessege {
         alert.showAndWait();
     }
 
-    public void confirmMessege(String title, String messege) {
+    public Optional<ButtonType> confirmMessege(String title, String messege) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION) ;
         alert.setHeaderText(title);
         alert.setContentText(messege);
-        alert.showAndWait();
+        Optional<ButtonType> response = alert.showAndWait();
+        return response ;
     }
 
 }
