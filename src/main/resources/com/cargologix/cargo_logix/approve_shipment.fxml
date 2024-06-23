@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="800.0" prefWidth="920.0" styleClass="rootPane" stylesheets="@css/approve_shipment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargologix.cargo_logix.ApproveShipment">
+<AnchorPane prefHeight="800.0" prefWidth="920.0" styleClass="rootPane" stylesheets="@css/approve_shipment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargologix.cargo_logix.controllers.Approve_Shipment_Controller">
    <children>
       <AnchorPane prefHeight="80.0" prefWidth="920.0" styleClass="title-bar">
          <children>
@@ -25,15 +24,15 @@
       </AnchorPane>
       <BorderPane layoutY="79.0" prefHeight="721.0" prefWidth="920.0">
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="pendingRequestVIew" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="97.0" text="Shipment ID" />
-                <TableColumn prefWidth="155.0" text="Shipment Name" />
-                  <TableColumn prefWidth="125.0" text="Sender" />
-                  <TableColumn prefWidth="125.0" text="Reciever" />
-                  <TableColumn prefWidth="165.0" text="Destination" />
-                  <TableColumn prefWidth="115.0" text="Weight" />
-                  <TableColumn prefWidth="130.0" text="Date" />
+                <TableColumn fx:id="idP" prefWidth="97.0" text="Shipment ID" />
+                  <TableColumn fx:id="senderP" prefWidth="125.0" text="Sender" />
+                  <TableColumn fx:id="recieverP" prefWidth="125.0" text="Reciever" />
+                  <TableColumn fx:id="destP" prefWidth="165.0" text="Destination" />
+                  <TableColumn fx:id="weightP" prefWidth="115.0" text="Weight" />
+                <TableColumn fx:id="outOrinP" prefWidth="155.0" text="Outgoing/Incoming" />
+                  <TableColumn fx:id="dateP" prefWidth="130.0" text="Date" />
               </columns>
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />
@@ -53,15 +52,15 @@
          <bottom>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField layoutX="43.0" layoutY="54.0" prefHeight="20.0" prefWidth="192.0" promptText="Enter Shipment ID" />
-                  <TableView layoutX="280.0" layoutY="26.0" prefHeight="148.0" prefWidth="361.0">
+                  <TextField fx:id="shipmentID" layoutX="43.0" layoutY="54.0" prefHeight="20.0" prefWidth="192.0" promptText="Enter Shipment ID" />
+                  <TableView fx:id="sameDateView" layoutX="280.0" layoutY="26.0" prefHeight="148.0" prefWidth="361.0">
                     <columns>
-                      <TableColumn prefWidth="116.0" text="Shipment ID" />
-                      <TableColumn prefWidth="107.0" text="Destination" />
-                        <TableColumn prefWidth="137.0" text="Outgoing/Incoming" />
+                      <TableColumn fx:id="idS" prefWidth="116.0" text="Shipment ID" />
+                      <TableColumn fx:id="destS" prefWidth="107.0" text="Destination" />
+                        <TableColumn fx:id="outOrinS" prefWidth="137.0" text="Outgoing/Incoming" />
                     </columns>
                   </TableView>
-                  <DatePicker layoutX="43.0" layoutY="114.0" prefHeight="23.0" prefWidth="191.0" />
+                  <DatePicker fx:id="dateSelect" layoutX="43.0" layoutY="114.0" onAction="#viewShipments" prefHeight="23.0" prefWidth="191.0" />
                   <Button layoutX="685.0" layoutY="48.0" mnemonicParsing="false" onAction="#approveShipment" prefHeight="25.0" prefWidth="206.0" styleClass="submit_btn" text="Approve" />
                   <Button layoutX="685.0" layoutY="89.0" mnemonicParsing="false" onAction="#rejectShipment" prefHeight="25.0" prefWidth="206.0" styleClass="reject_btn" text="Reject" />
                   <Button layoutX="685.0" layoutY="131.0" mnemonicParsing="false" onAction="#cancelShipment" prefHeight="25.0" prefWidth="206.0" styleClass="cancel_btn" text="Cancel" />

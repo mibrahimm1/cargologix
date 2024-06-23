@@ -22,6 +22,7 @@ public class Shipment {
     private SimpleBooleanProperty tempControl ;
     private SimpleBooleanProperty scheduled ;
     private SimpleBooleanProperty approved ;
+    private SimpleStringProperty outOrin ;
 
     public Shipment(String id, String name, String sender, String receiver, String destination, float weight,
                     String shipmentType, String containerType, Timestamp scheduledTime, boolean isOut, boolean fragile,
@@ -41,6 +42,7 @@ public class Shipment {
         this.tempControl = new SimpleBooleanProperty(tempControl);
         this.scheduled = new SimpleBooleanProperty(false);
         this.approved = new SimpleBooleanProperty(false);
+        this.outOrin = new SimpleStringProperty(this.isOut.get() ? "Outgoing" : "Incoming");
     }
 
     public Shipment() {
@@ -58,30 +60,19 @@ public class Shipment {
         this.tempControl = new SimpleBooleanProperty();
         this.scheduled = new SimpleBooleanProperty();
         this.approved = new SimpleBooleanProperty();
-
+        this.outOrin = new SimpleStringProperty(this.isOut.get() ? "Outgoing" : "Incoming");
     }
-    public Shipment(String id, String destination, String weight,
-                    String shipmentType) {
+
+    public Shipment(String id, String destination, String weight, String shipmentType) {
         this.id = new SimpleStringProperty(id);
         this.destination = new SimpleStringProperty(destination);
         this.weight = new SimpleFloatProperty(Float.parseFloat(weight));
         this.shipmentType = new SimpleStringProperty(shipmentType);
+        this.outOrin = new SimpleStringProperty(this.isOut.get() ? "Outgoing" : "Incoming");
     }
 
-
-    /* public Shipment(String id, String destination, String containertype,
-                    String shipmentTime) {
-        this.id = new SimpleStringProperty(id);
-        this.destination = new SimpleStringProperty(destination);
-        this.containerType = new SimpleStringProperty(containertype);
-        this.scheduledTime = new SimpleStringProperty(shipmentTime);
-    } */
-
-
-
     public Shipment(String id, String name, String sender, String receiver, String destination, float weight,
-                    String shipmentType, boolean isOut, boolean fragile,
-                    boolean tempControl) {
+                    String shipmentType, boolean isOut, boolean fragile, boolean tempControl) {
         this.id = new SimpleStringProperty(id);
         this.name = new SimpleStringProperty(name);
         this.sender = new SimpleStringProperty(sender);
@@ -96,6 +87,7 @@ public class Shipment {
         this.tempControl = new SimpleBooleanProperty(tempControl);
         this.scheduled = new SimpleBooleanProperty(false);
         this.approved = new SimpleBooleanProperty(false);
+        this.outOrin = new SimpleStringProperty(this.isOut.get() ? "Outgoing" : "Incoming");
     }
 
     public Shipment(String id, String name, String sender, String receiver, String destination, float weight,
@@ -116,6 +108,7 @@ public class Shipment {
         this.tempControl = new SimpleBooleanProperty(tempControl);
         this.scheduled = new SimpleBooleanProperty(scheduled);
         this.approved = new SimpleBooleanProperty(false);
+        this.outOrin = new SimpleStringProperty(this.isOut.get() ? "Outgoing" : "Incoming");
     }
 
     public Shipment(String id, String name, String sender, String receiver, String destination, float weight,
@@ -136,12 +129,24 @@ public class Shipment {
         this.tempControl = new SimpleBooleanProperty(tempControl);
         this.scheduled = new SimpleBooleanProperty(scheduled);
         this.approved = new SimpleBooleanProperty(approved);
+        this.outOrin = new SimpleStringProperty(this.isOut.get() ? "Outgoing" : "Incoming");
+    }
+
+    public String getOutOrin() {
+        return outOrin.get();
+    }
+
+    public void setOutOrin() {
+        this.outOrin.set(this.isOut.get() ? "Outgoing" : "Incoming");
+    }
+
+    public void setOutOrin(String outOrin) {
+        this.outOrin.set(outOrin);
     }
 
     public String getId() {
         return id.get();
     }
-
 
     public void setId(String id) {
         this.id.set(id);
@@ -150,7 +155,6 @@ public class Shipment {
     public String getName() {
         return name.get();
     }
-
 
     public void setName(String name) {
         this.name.set(name);
@@ -168,7 +172,6 @@ public class Shipment {
         return receiver.get();
     }
 
-
     public void setReceiver(String receiver) {
         this.receiver.set(receiver);
     }
@@ -176,7 +179,6 @@ public class Shipment {
     public String getDestination() {
         return destination.get();
     }
-
 
     public void setDestination(String destination) {
         this.destination.set(destination);
