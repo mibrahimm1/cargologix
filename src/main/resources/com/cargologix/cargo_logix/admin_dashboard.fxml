@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1130.0" styleClass="rootPane" stylesheets="@css/admin_dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargologix.cargo_logix.controllers.Admin_Dashboard_Controller">
+<AnchorPane fx:id="rootPane" prefHeight="750.0" prefWidth="1130.0" styleClass="rootPane" stylesheets="@css/admin_dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargologix.cargo_logix.controllers.Admin_Dashboard_Controller">
    <children>
       <AnchorPane prefHeight="80.0" prefWidth="1130.0" styleClass="title-bar">
          <children>
@@ -64,7 +64,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="View Managers">
+                <Tab fx:id="viewManagerSection" text="View Managers">
                   <content>
                     <AnchorPane fx:id="managerSection" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -101,7 +101,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="View Customers">
+                  <Tab fx:id="viewCustomerSection" text="View Customers">
                      <content>
                         <AnchorPane fx:id="customerSection" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

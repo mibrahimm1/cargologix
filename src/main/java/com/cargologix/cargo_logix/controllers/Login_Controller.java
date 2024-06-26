@@ -105,11 +105,13 @@ public class Login_Controller implements Initializable {
                                 loadAdminDashboard();
                             } else if (isManager) {
                                 LoginStatus.setManagerLogged(true);
-                                LoginStatus.setManagerID("XYZ");
+                                String managerID = rs.getString("id");
+                                LoginStatus.setManagerID(managerID);
                                 loadManagerDashboard();
                             } else if (isCustomer) {
                                 LoginStatus.setCustomerLogged(true);
-                                LoginStatus.setCustomerID("XYZ");
+                                String customerID = rs.getString("id");
+                                LoginStatus.setManagerID(customerID);
                                 loadCustomerDashboard();
                             }
                         } else {
