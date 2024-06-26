@@ -105,6 +105,8 @@ public class Login_Controller implements Initializable {
                                 loadAdminDashboard();
                             } else if (isManager) {
                                 LoginStatus.setManagerLogged(true);
+                                System.out.println(LoginStatus.isManagerLogged());
+                                System.out.println(LoginStatus.isAdminLogged());
                                 String managerID = rs.getString("id");
                                 LoginStatus.setManagerID(managerID);
                                 loadManagerDashboard();

@@ -1,6 +1,7 @@
 package com.cargologix.cargo_logix.controllers;
 
 import com.cargologix.cargo_logix.classes.AlertMessege;
+import com.cargologix.cargo_logix.classes.LoginStatus;
 import com.cargologix.cargo_logix.database.db;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -136,91 +137,122 @@ public class View_Shipment_Controller implements Initializable {
         filterOutgoing.setSelected(false);
         filterIncoming.setSelected(false);
         clearTable();
-        String qu = "SELECT * FROM SHIPMENT";
-        ResultSet rs = DBHandler.executeQuery(qu);
-        System.out.println(rs);
-        try {
-            while (rs.next()) {
-                String ShipmentID = rs.getString("id");
-                String Name = rs.getString("name");
-                String Sender = rs.getString("sender");
-                String Receiver = rs.getString("receiver");
-                String Destination = rs.getString("destination");
-                Float Weight = rs.getFloat("weight");
-                String Type = rs.getString("type");
-                Boolean Fragile = rs.getBoolean("isFragile");
-                Boolean TempC = rs.getBoolean("isTempControl");
-                Boolean IsOut = rs.getBoolean("isOutgoing");
-                Shipment newShipment = new Shipment();
-                newShipment.setId(ShipmentID);
-                newShipment.setName(Name);
-                newShipment.setShipmentType(Type);
-                newShipment.setTempControl(TempC);
-                newShipment.setIsOut(IsOut);
-                newShipment.setOutOrin();
-                newShipment.setDestination(Destination);
-                newShipment.setSender(Sender);
-                newShipment.setReceiver(Receiver);
-                newShipment.setWeight(Weight);
-                newShipment.setFragile(Fragile);
-                newShipment.setIsOut(rs.getBoolean("isOutgoing"));
-                newShipment.setOutOrin();
-                shipmentList.add(newShipment);
-            }
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Schedule_Shipment_Controller.class.getName()).log(Level.SEVERE, null, ex);
+
+        String qu = null;
+
+        if (LoginStatus.isAdminLogged()) {
+            qu = "SELECT * FROM SHIPMENT";
+        } else if (LoginStatus.isManagerLogged()) {
+            qu = "SELECT * FROM SHIPMENT WHERE isScheduled = 0";
         }
 
-        shipmentTable.getItems().setAll(shipmentList);
+        if (qu != null) {
+            ResultSet rs = DBHandler.executeQuery(qu);
+            System.out.println(rs);
+            try {
+                while (rs.next()) {
+                    String ShipmentID = rs.getString("id");
+                    String Name = rs.getString("name");
+                    String Sender = rs.getString("sender");
+                    String Receiver = rs.getString("receiver");
+                    String Destination = rs.getString("destination");
+                    Float Weight = rs.getFloat("weight");
+                    String Type = rs.getString("type");
+                    Boolean Fragile = rs.getBoolean("isFragile");
+                    Boolean TempC = rs.getBoolean("isTempControl");
+                    Boolean IsOut = rs.getBoolean("isOutgoing");
+
+                    Shipment newShipment = new Shipment();
+                    newShipment.setId(ShipmentID);
+                    newShipment.setName(Name);
+                    newShipment.setShipmentType(Type);
+                    newShipment.setTempControl(TempC);
+                    newShipment.setIsOut(IsOut);
+                    newShipment.setOutOrin();
+                    newShipment.setDestination(Destination);
+                    newShipment.setSender(Sender);
+                    newShipment.setReceiver(Receiver);
+                    newShipment.setWeight(Weight);
+                    newShipment.setFragile(Fragile);
+                    newShipment.setIsOut(IsOut);
+                    newShipment.setOutOrin();
+
+                    shipmentList.add(newShipment);
+                }
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Schedule_Shipment_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            shipmentTable.getItems().setAll(shipmentList);
+        } else {
+            System.out.println("No valid login status found.");
+        }
     }
+
 
     private void loadData() {
         clearTable();
-        String qu = "SELECT * FROM SHIPMENT";
-        ResultSet rs = DBHandler.executeQuery(qu);
-        System.out.println(rs);
-        try {
-            while (rs.next()) {
-                String ShipmentID = rs.getString("id");
-                String Name = rs.getString("name");
-                String Sender = rs.getString("sender");
-                String Receiver = rs.getString("receiver");
-                String Destination = rs.getString("destination");
-                Float Weight = rs.getFloat("weight");
-                String Type = rs.getString("type");
-                Boolean Fragile = rs.getBoolean("isFragile");
-                Boolean TempC = rs.getBoolean("isTempControl");
-                Boolean IsOut = rs.getBoolean("isOutgoing");
-                Shipment newShipment = new Shipment();
-                newShipment.setId(ShipmentID);
-                newShipment.setName(Name);
-                newShipment.setShipmentType(Type);
-                newShipment.setTempControl(TempC);
-                newShipment.setIsOut(IsOut);
-                newShipment.setOutOrin();
-                newShipment.setDestination(Destination);
-                newShipment.setSender(Sender);
-                newShipment.setFragile(Fragile);
-                newShipment.setReceiver(Receiver);
-                newShipment.setWeight(Weight);
-                newShipment.setIsOut(rs.getBoolean("isOutgoing"));
-                newShipment.setOutOrin();
-                shipmentList.add(newShipment);
-            }
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Schedule_Shipment_Controller.class.getName()).log(Level.SEVERE, null, ex);
+
+        String qu = null;
+        if (LoginStatus.isAdminLogged()) {
+            qu = "SELECT * FROM SHIPMENT";
+        } else if (LoginStatus.isManagerLogged()) {
+            qu = "SELECT * FROM SHIPMENT WHERE isScheduled = 0";
         }
 
-        shipmentTable.getItems().setAll(shipmentList);
+        if (qu != null) {
+            ResultSet rs = DBHandler.executeQuery(qu);
+            System.out.println(rs);
+            try {
+                while (rs.next()) {
+                    String ShipmentID = rs.getString("id");
+                    String Name = rs.getString("name");
+                    String Sender = rs.getString("sender");
+                    String Receiver = rs.getString("receiver");
+                    String Destination = rs.getString("destination");
+                    Float Weight = rs.getFloat("weight");
+                    String Type = rs.getString("type");
+                    Boolean Fragile = rs.getBoolean("isFragile");
+                    Boolean TempC = rs.getBoolean("isTempControl");
+                    Boolean IsOut = rs.getBoolean("isOutgoing");
+                    Shipment newShipment = new Shipment();
+                    newShipment.setId(ShipmentID);
+                    newShipment.setName(Name);
+                    newShipment.setShipmentType(Type);
+                    newShipment.setTempControl(TempC);
+                    newShipment.setIsOut(IsOut);
+                    newShipment.setOutOrin();
+                    newShipment.setDestination(Destination);
+                    newShipment.setSender(Sender);
+                    newShipment.setFragile(Fragile);
+                    newShipment.setReceiver(Receiver);
+                    newShipment.setWeight(Weight);
+                    newShipment.setIsOut(rs.getBoolean("isOutgoing"));
+                    newShipment.setOutOrin();
+                    shipmentList.add(newShipment);
+                }
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Schedule_Shipment_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            shipmentTable.getItems().setAll(shipmentList);
+        } else {
+            System.out.println("No valid login status found.");
+        }
     }
 
 
     @FXML
     private void loadDataFilter(ActionEvent event) {
         clearTable();
-        String qu = "SELECT * FROM SHIPMENT WHERE 1=1" ;
+        String qu = null;
+        if (LoginStatus.isAdminLogged()) {
+            qu = "SELECT * FROM SHIPMENT WHERE 1=1";
+        } else if (LoginStatus.isManagerLogged()) {
+            qu = "SELECT * FROM SHIPMENT WHERE isScheduled = 0 AND WHERE 1=1";
+        }
 
         if(!filterName.getText().isEmpty()) {
             qu += " AND name = '" + filterName.getText() + "'";
@@ -249,8 +281,12 @@ public class View_Shipment_Controller implements Initializable {
         if (filterIncoming.isSelected()) {
             qu += " AND isOutgoing = 0";
         }
-        if (qu.equals("SELECT * FROM SHIPMENT WHERE 1=1")) {
-            qu = "SELECT * FROM SHIPMENT";
+        if (qu.equals("SELECT * FROM SHIPMENT WHERE 1=1") || qu.equals("SELECT * FROM SHIPMENT WHERE isScheduled = 0 AND WHERE 1=1")) {
+            if (LoginStatus.isAdminLogged()) {
+                qu = "SELECT * FROM SHIPMENT";
+            } else if (LoginStatus.isManagerLogged()) {
+                qu = "SELECT * FROM SHIPMENT WHERE isScheduled = 0";
+            }
         }
         System.out.println(qu);
         ResultSet rs = DBHandler.executeQuery(qu);

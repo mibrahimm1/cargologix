@@ -1,9 +1,9 @@
 package com.cargologix.cargo_logix.classes;
 
 public class LoginStatus {
-    private static boolean AdminLogged = true;
-    private static boolean ManagerLogged ;
-    private static boolean CustomerLogged ;
+    private static boolean AdminLogged = false;
+    private static boolean ManagerLogged = false;
+    private static boolean CustomerLogged = false;
 
     private static String ManagerID ;
     private static String CustomerID ;
