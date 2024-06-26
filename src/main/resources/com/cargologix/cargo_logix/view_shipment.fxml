@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="643.0" prefWidth="1209.0" styleClass="rootPane" stylesheets="@css/view_shipment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargologix.cargo_logix.controllers.View_Shipment_Controller">
+   <children>
+      <AnchorPane prefHeight="80.0" prefWidth="1209.0" styleClass="title-bar">
+         <children>
+            <Label layoutX="512.0" layoutY="24.0" styleClass="title-label" text="View Shipments">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <BorderPane layoutY="80.0" prefHeight="564.0" prefWidth="1209.0">
+         <right>
+            <TableView fx:id="shipmentTable" prefHeight="680.0" prefWidth="962.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="idC" prefWidth="83.0" text="Shipment ID" />
+                <TableColumn fx:id="nameC" prefWidth="100.0" text="Name" />
+                  <TableColumn fx:id="senderC" prefWidth="100.0" text="Sender" />
+                  <TableColumn fx:id="recieverC" prefWidth="100.0" text="Reciever" />
+                  <TableColumn fx:id="destinationC" prefWidth="100.0" text="Destination" />
+                  <TableColumn fx:id="weightC" prefWidth="60.0" text="Weight" />
+                  <TableColumn fx:id="typeC" prefWidth="100.0" text="Type" />
+                  <TableColumn fx:id="fragileC" prefWidth="54.0" text="Fragile" />
+                  <TableColumn fx:id="tempC" prefWidth="132.0" text="Temperature Control" />
+                  <TableColumn fx:id="outOrinC" prefWidth="132.0" text="Outgoing/Incoming" />
+              </columns>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </TableView>
+         </right>
+         <left>
+            <AnchorPane prefHeight="700.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="filterName" layoutX="14.0" layoutY="61.0" prefHeight="23.0" prefWidth="213.0" promptText="Search by Name" />
+                  <TextField fx:id="filterSender" layoutX="14.0" layoutY="106.0" prefHeight="23.0" prefWidth="213.0" promptText="Search by Sender" />
+                  <TextField fx:id="filterReciever" layoutX="14.0" layoutY="149.0" prefHeight="23.0" prefWidth="213.0" promptText="Search by Reciever" />
+                  <TextField fx:id="filterDestination" layoutX="14.0" layoutY="191.0" prefHeight="23.0" prefWidth="213.0" promptText="Search by Destination" />
+                  <ComboBox fx:id="filterType" layoutX="14.0" layoutY="237.0" prefHeight="23.0" prefWidth="213.0" />
+                  <RadioButton fx:id="filterFragile" layoutX="14.0" layoutY="278.0" mnemonicParsing="false" text="Fragile" />
+                  <RadioButton fx:id="filterTemperatureControl" layoutX="84.0" layoutY="279.0" mnemonicParsing="false" text="Temperature Control" />
+                  <RadioButton fx:id="filterOutgoing" layoutX="14.0" layoutY="312.0" mnemonicParsing="false" text="Outgoing" />
+                  <RadioButton fx:id="filterIncoming" layoutX="107.0" layoutY="312.0" mnemonicParsing="false" text="Incoming" />
+                  <Button layoutX="23.0" layoutY="359.0" mnemonicParsing="false" onAction="#loadDataFilter" prefHeight="23.0" prefWidth="195.0" styleClass="submit_btn" text="Apply" />
+                  <Button layoutX="23.0" layoutY="397.0" mnemonicParsing="false" onAction="#loadData" prefHeight="23.0" prefWidth="195.0" styleClass="reject_btn" text="Reset" />
+                  <Button layoutX="23.0" layoutY="437.0" mnemonicParsing="false" onAction="#close" prefHeight="23.0" prefWidth="195.0" styleClass="cancel_btn" text="Close" />
+               </children>
+            </AnchorPane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>
