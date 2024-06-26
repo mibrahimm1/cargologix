@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="rootPane" prefHeight="383.0" prefWidth="540.0" styleClass="rootPane" stylesheets="@css/add_member.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargologix.cargo_logix.controllers.Add_Member_Controller">
+   <children>
+      <AnchorPane prefHeight="80.0" prefWidth="540.0" styleClass="title-bar">
+         <children>
+            <Label layoutX="193.0" layoutY="24.0" styleClass="title-label" text="Add Account" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="adminForm" layoutY="80.0" prefHeight="304.0" prefWidth="540.0" styleClass="rootPane">
+         <children>
+            <TextField fx:id="idA" layoutX="52.0" layoutY="32.0" prefHeight="23.0" prefWidth="435.0" promptText="Enter ID" />
+            <TextField fx:id="usernameA" layoutX="52.0" layoutY="68.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Username" AnchorPane.rightAnchor="288.0" />
+            <TextField fx:id="passwordA" layoutX="286.0" layoutY="68.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Password" />
+            <TextField fx:id="nameA" layoutX="52.0" layoutY="106.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Name" />
+            <TextField fx:id="emailA" layoutX="286.0" layoutY="106.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Email" />
+            <TextField fx:id="phoneNumberA" layoutX="52.0" layoutY="189.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Phone Number" />
+            <TextField fx:id="addressA" layoutX="53.0" layoutY="147.0" prefHeight="23.0" prefWidth="435.0" promptText="Enter Address" />
+            <ComboBox fx:id="accountType" layoutX="286.0" layoutY="188.0" prefHeight="23.0" prefWidth="200.0" promptText="Select Account Type" />
+            <Button layoutX="77.0" layoutY="240.0" mnemonicParsing="false" onAction="#addAccount" prefHeight="32.0" prefWidth="151.0" styleClass="submit_btn" text="Add" />
+            <Button layoutX="311.0" layoutY="240.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="151.0" styleClass="cancel_btn" text="Cancel" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="managerForm" layoutY="80.0" prefHeight="304.0" prefWidth="540.0" styleClass="rootPane" visible="false">
+         <children>
+            <TextField fx:id="idM" layoutX="52.0" layoutY="32.0" prefHeight="23.0" prefWidth="435.0" promptText="Enter ID" />
+            <TextField fx:id="usernameM" layoutX="52.0" layoutY="68.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Username" AnchorPane.rightAnchor="288.0" />
+            <TextField fx:id="passwordM" layoutX="286.0" layoutY="68.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Password" />
+            <TextField fx:id="nameM" layoutX="52.0" layoutY="106.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Name" />
+            <TextField fx:id="emailM" layoutX="286.0" layoutY="106.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Email" />
+            <TextField fx:id="phoneNumberM" layoutX="52.0" layoutY="189.0" prefHeight="23.0" prefWidth="200.0" promptText="Enter Phone Number" />
+            <TextField fx:id="addressM" layoutX="53.0" layoutY="147.0" prefHeight="23.0" prefWidth="435.0" promptText="Enter Address" />
+            <Button layoutX="77.0" layoutY="240.0" mnemonicParsing="false" onAction="#addAccount" prefHeight="32.0" prefWidth="151.0" styleClass="submit_btn" text="Add" />
+            <Button layoutX="311.0" layoutY="240.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="151.0" styleClass="cancel_btn" text="Cancel" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

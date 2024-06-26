@@ -154,10 +154,11 @@ public class Login_Controller implements Initializable {
                                 + "'" + contact + "',"
                                 + "'" + email + "',"
                                 + "'" + address + "')";
-                        String action = "INSERT INTO ACCOUNT(username,password,id) VALUES ("
+                        String action = "INSERT INTO ACCOUNT(username,password,id,isCustomer) VALUES ("
                                 + "'" + uName + "',"
                                 + "'" + pWord + "',"
-                                + "'" + mID + "')";
+                                + "'" + mID + "',"
+                                + "1)";
                         if (databaseHandler.executeAction(action2) && databaseHandler.executeAction(action)) {
                             alert.confirmMessege("Success","User Registered Successfully!");
                             registerForm.setVisible(false);
