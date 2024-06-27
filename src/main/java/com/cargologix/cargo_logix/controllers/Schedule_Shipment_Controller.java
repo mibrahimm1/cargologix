@@ -21,6 +21,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,6 +102,8 @@ public class Schedule_Shipment_Controller implements Initializable {
 
     db DBhandler = db.getInstance();
 
+    boolean detailsOn = false ;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         containerSelect.getItems().setAll("Dry", "Open Top", "Reefer", "Tank", "Flat Rack", "Ventilated", "Insulated Thermal");
@@ -111,6 +114,7 @@ public class Schedule_Shipment_Controller implements Initializable {
 
     @FXML
     void viewDetails(ActionEvent event) {
+        detailsOn = false;
         String ShipmentID = shipmentID.getText() ;
         if (ShipmentID.isEmpty()) {
             alert.errorMessege("Error","Please enter a Shipment ID");
@@ -131,6 +135,7 @@ public class Schedule_Shipment_Controller implements Initializable {
                     outOrinD.setText("Outgoing or Incoming: " + (outgoing? "Outgoing" : "Incoming"));
                     fragileD.setText("Fragile: " + (isfragile?"Yes":"No"));
                     tempcontrolD.setText("Temperature Controlled: " + (istempControl?"Yes":"No"));
+                    detailsOn = true ;
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -244,7 +249,35 @@ public class Schedule_Shipment_Controller implements Initializable {
                 }
             }
         }
+    }
 
+    @FXML
+    void deleteShipment(ActionEvent event) {
+        if (!detailsOn) {
+            alert.errorMessege("Error","Please enter in a Shipment ID to view request details");
+            return ;
+        }
+        Optional<ButtonType> response = alert.confirmMessege("Confirm","Do you really want to delete this request?");
+        if (response.isPresent() && response.get() == ButtonType.OK) {
+            String ac1 = "DELETE FROM SHIPMENT WHERE id = '" + shipmentID.getText() + "'" ;
+            if (DBhandler.executeAction(ac1)) {
+                clearTable();
+                nameD.setText("Shipment Name: ");
+                senderD.setText("Sender: ");
+                recieverD.setText("Receiver: ");
+                outOrinD.setText("Outgoing or Incoming: ");
+                fragileD.setText("Fragile: ");
+                tempcontrolD.setText("Temperature Controlled: ");
+                detailsOn = false ;
+                shipmentID.clear();
+                loadData();
+                alert.infoMessege("Success","Shipment Request Deleted Successfully!");
+            } else {
+                alert.errorMessege("Error","Failed to Delete Shipment Request");
+            }
+        } else {
+            alert.infoMessege("Cancelled","Deletion Cancelled");
+        }
     }
 
 

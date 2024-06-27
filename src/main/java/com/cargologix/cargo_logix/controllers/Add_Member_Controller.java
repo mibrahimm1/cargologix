@@ -144,13 +144,13 @@ public class Add_Member_Controller implements Initializable {
                 }
             }
         } else if (LoginStatus.isManagerLogged()) {
-            String Username = usernameA.getText();
-            String ID = idA.getText();
-            String Password = passwordA.getText();
-            String Name = nameA.getText();
-            String Contact = phoneNumberA.getText();
-            String Email = emailA.getText();
-            String Address = addressA.getText();
+            String Username = usernameM.getText();
+            String ID = idM.getText();
+            String Password = passwordM.getText();
+            String Name = nameM.getText();
+            String Contact = phoneNumberM.getText();
+            String Email = emailM.getText();
+            String Address = addressM.getText();
             if (Username.isEmpty() || Password.isEmpty() || Name.isEmpty() || Contact.isEmpty() || Email.isEmpty() || Address.isEmpty()) {
                 alert.errorMessege("Error","Please enter in all fields");
             } else {

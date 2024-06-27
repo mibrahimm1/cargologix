@@ -283,6 +283,13 @@ public class Manager_Dashboard_Controller implements Initializable {
     }
 
     @FXML
+    void loadEditDetails(ActionEvent event) {
+        WindowLoader windowLoader = new WindowLoader();
+        windowLoader.loadWindow("edit_member.fxml", "Edit Details");
+
+    }
+
+    @FXML
     void logOut(ActionEvent event) {
         Optional<ButtonType> response = alert.confirmMessege("Confirm Logout","Are you sure you want to logout?");
         if (response.isPresent() & response.get() == ButtonType.OK) {
