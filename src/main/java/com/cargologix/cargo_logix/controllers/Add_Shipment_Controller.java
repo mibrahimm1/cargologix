@@ -91,7 +91,7 @@ public class Add_Shipment_Controller implements Initializable {
             || Weight.isEmpty() || !outOrin || shipType.isEmpty()) {
                 alert.errorMessege("Error","Please fill in all necessary fields");
             } else {
-                String action = "INSERT INTO SHIPMENT(name,sender,receiver,destination,weight,isOutgoing,type,isFragile,isTempControl) VALUES ( "
+                String action = "INSERT INTO SHIPMENT(name,sender,receiver,destination,weight,isOutgoing,type,isFragile,isTempControl,isScheduled) VALUES ( "
                         + "'" + shipName + "',"
                         + "'" + sender + "',"
                         + "'" + reciever + "',"
@@ -100,7 +100,8 @@ public class Add_Shipment_Controller implements Initializable {
                         + "'" + (isOut?1:0) + "',"
                         + "'" + shipType + "',"
                         + "'" + (fragile?1:0) + "',"
-                        + "'" + (tempControl?1:0) + "' )" ;
+                        + "'" + (tempControl?1:0) + "',"
+                        + " 0 )";
                 if (databaseHandler.executeAction(action)) {
                     alert.confirmMessege("Success","Shipment request added successfully!");
                 } else {

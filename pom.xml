@@ -124,7 +124,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.cargologix.cargo_logix/com.cargologix.cargo_logix.HelloApplication</mainClass>
+              <mainClass>com.cargologix.cargo_logix/com.cargologix.cargo_logix.Main</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

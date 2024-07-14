@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Cargo_Logix">
+    <output-path>$PROJECT_DIR$/out/artifacts/Cargo_Logix</output-path>
+    <root id="root">
+      <element id="archive" name="Cargo_Logix.jar">
+        <element id="module-output" name="Cargo_Logix" />
+      </element>
+    </root>
+  </artifact>
+</component>

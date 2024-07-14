@@ -154,7 +154,12 @@ public class Schedule_Shipment_Controller implements Initializable {
                 String Weight = rs.getString("weight");
                 String ShipmentType = rs.getString("type");
                 System.out.println(ShipmentID + " " + Destination + " " + Weight + " " + ShipmentType);
-                unscheduledShipments.add(new Shipment(ShipmentID, Destination, Weight, ShipmentType));
+                Shipment newShipment = new Shipment();
+                newShipment.setId(ShipmentID);
+                newShipment.setDestination(Destination);
+                newShipment.setWeight(Float.parseFloat(Weight));
+                newShipment.setShipmentType(ShipmentType);
+                unscheduledShipments.add(newShipment);
             }
             rs.close();
         } catch (SQLException ex) {
